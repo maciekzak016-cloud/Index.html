@@ -38,6 +38,7 @@
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
 
     body {
@@ -78,7 +79,7 @@
     }
 
     .nav-btn.active {
-      color: #b9a4ff;
+      color: #22d3ee;
       transform: translateY(-2px);
     }
 
@@ -127,257 +128,49 @@
     .dot:nth-child(2) { animation-delay: 0.4s; }
     .dot:nth-child(3) { animation-delay: 0.8s; }
 
-    .tech-nav-mark {
-      width: 22px;
-      height: 22px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 8px;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      background: linear-gradient(135deg, rgba(34,211,238,0.22), rgba(168,85,247,0.18));
-      border: 1px solid rgba(34,211,238,0.45);
-      box-shadow: 0 0 15px rgba(34,211,238,0.22), 0 0 18px rgba(168,85,247,0.18);
-      color: #b7f4ff;
-      margin-bottom: 2px;
+    /* WŁASNY CPU INTERFEJS TECHNIXPRO MINERA */
+    .tp-cpu-card {
+      background: #000000;
+      border: 2px solid #22d3ee;
+      box-shadow: 0 0 25px rgba(34, 211, 238, 0.3), inset 0 0 15px rgba(139, 92, 246, 0.2);
+      cursor: pointer;
+      transition: transform 0.05s ease;
     }
 
-    .tech-screen-shell {
-      position: relative;
-      overflow: hidden;
-      background: radial-gradient(circle at center, rgba(17,24,39,0.94), rgba(2,6,23,0.98) 52%, rgba(2,6,23,1) 100%);
-      border: 1px solid rgba(148,163,184,0.22);
-      border-radius: 28px;
-      padding: 18px 10px 14px;
-      box-shadow: inset 0 0 30px rgba(34,211,238,0.08), inset 0 0 40px rgba(168,85,247,0.08), 0 18px 40px rgba(2,6,23,0.8);
+    .tp-cpu-card:active {
+      transform: scale(0.97);
     }
 
-    .tech-screen-shell::before {
-      content: "";
+    .tp-pin {
+      background: #8b5cf6;
+      box-shadow: 0 0 8px #8b5cf6;
+    }
+
+    .tp-pulse-ring {
+      animation: tpPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    /* ANIMACJA CZĄSTECZEK OD KLIKANIA */
+    .click-particle {
       position: absolute;
-      inset: 7% 8%;
-      border-radius: 50%;
-      background: linear-gradient(135deg, rgba(34,211,238,0.08), rgba(168,85,247,0.1));
-      filter: blur(12px);
-      z-index: 0;
-    }
-
-    .tech-circuit {
-      position: absolute;
-      inset: 8% 8%;
-      border-radius: 50%;
       pointer-events: none;
-      z-index: 0;
-      background:
-        linear-gradient(120deg, transparent 0 18%, rgba(59,130,246,0.2) 18% 19%, transparent 19% 21%, rgba(34,211,238,0.75) 21% 22%, transparent 22% 26%, rgba(168,85,247,0.72) 26% 27%, transparent 28% 33%, rgba(34,211,238,0.72) 33% 34%, transparent 34% 38%, rgba(168,85,247,0.72) 38% 39%, transparent 39% 45%, rgba(34,211,238,0.68) 45% 46%, transparent 46% 52%, rgba(168,85,247,0.68) 52% 53%, transparent 53% 60%, rgba(34,211,238,0.7) 60% 61%, transparent 61% 68%, rgba(168,85,247,0.68) 68% 69%, transparent 69% 72%, rgba(34,211,238,0.72) 72% 73%, transparent 73% 100%),
-        linear-gradient(30deg, transparent 0 16%, rgba(59,130,246,0.18) 16% 17%, transparent 17% 20%, rgba(34,211,238,0.72) 20% 21%, transparent 21% 24%, rgba(168,85,247,0.74) 24% 25%, transparent 25% 32%, rgba(34,211,238,0.76) 32% 33%, transparent 33% 39%, rgba(168,85,247,0.72) 39% 40%, transparent 40% 47%, rgba(34,211,238,0.68) 47% 48%, transparent 48% 55%, rgba(168,85,247,0.7) 55% 56%, transparent 56% 62%, rgba(34,211,238,0.76) 62% 63%, transparent 63% 76%, rgba(168,85,247,0.7) 76% 77%, transparent 77% 100%);
-      opacity: 0.95;
-      filter: drop-shadow(0 0 6px rgba(34,211,238,0.7)) drop-shadow(0 0 8px rgba(168,85,247,0.7));
-      animation: circuitPulse 7s ease-in-out infinite alternate;
-    }
-
-    .tech-circuit::before, .tech-circuit::after {
-      content: "";
-      position: absolute;
-      inset: 8% 12%;
-      border-radius: 50%;
-      border: 2px solid rgba(34,211,238,0.08);
-      border-left-color: rgba(34,211,238,0.32);
-      border-right-color: rgba(168,85,247,0.32);
-      transform: rotate(18deg);
-    }
-
-    .tech-circuit::after {
-      inset: 15% 18%;
-      border-color: rgba(168,85,247,0.08);
-      border-top-color: rgba(168,85,247,0.36);
-      border-bottom-color: rgba(34,211,238,0.36);
-      transform: rotate(-16deg);
-    }
-
-    .tech-core {
-      position: relative;
-      z-index: 2;
-      width: 150px;
-      height: 150px;
-      margin: 32px auto 12px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at center, rgba(90, 110, 255, 0.18), rgba(15, 23, 42, 0.94) 60%, rgba(2,6,23,1) 100%);
-      border: 1px solid rgba(180, 193, 220, 0.65);
-      box-shadow: 0 0 0 8px rgba(148,163,184,0.08), 0 0 30px rgba(34,211,238,0.2), 0 0 50px rgba(168,85,247,0.15);
-    }
-
-    .tech-logo {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 56px;
-      font-weight: 900;
-      background: linear-gradient(180deg, rgba(15,23,42,0.14), rgba(15,23,42,0.52));
-      color: transparent;
-      background-clip: padding-box;
-      -webkit-background-clip: text;
-      background-image: linear-gradient(135deg, #8de7ff 0%, #ba7bff 35%, #f0abff 100%);
-      text-shadow: 0 0 16px rgba(34,211,238,0.24), 0 0 22px rgba(168,85,247,0.28);
-      filter: drop-shadow(0 0 10px rgba(34,211,238,0.35));
-      transform: skewX(-8deg);
-    }
-
-    .tech-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #9feaff;
-      background: rgba(13,18,30,0.7);
-      border: 1px solid rgba(34,211,238,0.25);
-      border-radius: 999px;
-      padding: 5px 10px;
-      box-shadow: inset 0 0 12px rgba(34,211,238,0.14);
-    }
-
-    .tech-status .pulse-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #5eead4;
-      box-shadow: 0 0 10px rgba(45,212,191,0.8);
-      animation: pulseDot 1.8s infinite ease-in-out;
-    }
-
-    .tech-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
-
-    .tech-header p {
-      margin: 0 0 4px;
-      font-size: 9px;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: #7dd3fc;
-    }
-
-    .tech-header h2 {
-      margin: 0;
-      font-size: 20px;
       font-weight: 800;
-      color: white;
+      font-size: 14px;
+      color: #22d3ee;
+      text-shadow: 0 0 8px rgba(34,211,238,0.8);
+      animation: floatUp 0.6s ease-out forwards;
+      z-index: 50;
     }
 
-    .tech-stats {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      gap: 10px;
-      margin-top: 12px;
-      font-size: 11px;
-      color: #cbd5e1;
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-50px) scale(1.4); }
     }
 
-    .tech-stat-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      font-size: 10px;
-      color: #d6e3ff;
+    @keyframes tpPulse {
+      0%, 100% { opacity: 0.2; transform: scale(0.95); }
+      50% { opacity: 0.8; transform: scale(1.05); }
     }
-
-    .tech-stat-row strong {
-      color: #9ae6ff;
-      font-weight: 700;
-    }
-
-    .tech-progress {
-      height: 10px;
-      width: 100%;
-      border-radius: 999px;
-      overflow: hidden;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148,163,184,0.18);
-      box-shadow: inset 0 0 14px rgba(15, 23, 42, 0.8);
-    }
-
-    .tech-progress-fill {
-      height: 100%;
-      width: 0%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, #22d3ee, #a855f7, #ec4899);
-      box-shadow: 0 0 18px rgba(168,85,247,0.42);
-      transition: width 0.25s ease;
-    }
-
-    .tech-capsule {
-      position: absolute;
-      right: 18px;
-      bottom: 18px;
-      width: 118px;
-      height: 38px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148,163,184,0.32);
-      box-shadow: inset 0 0 16px rgba(8,11,20,0.8), 0 0 18px rgba(34,211,238,0.12);
-      overflow: hidden;
-      z-index: 2;
-    }
-
-    .tech-capsule-fill {
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 0%;
-      background: linear-gradient(90deg, rgba(34,211,238,0.7), rgba(168,85,247,0.72), rgba(236,72,153,0.7));
-      box-shadow: inset 0 0 12px rgba(255,255,255,0.1), 0 0 18px rgba(34,211,238,0.3);
-      transition: width 0.25s ease;
-    }
-
-    .tech-capsule span {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      color: #ecfeff;
-      text-shadow: 0 0 8px rgba(34,211,238,0.5);
-      z-index: 1;
-    }
-
-    .tech-token {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #e9f7ff, #7dd3fc 28%, #8b5cf6 70%, #1f293d 100%);
-      box-shadow: 0 0 10px rgba(34,211,238,0.7), 0 0 18px rgba(168,85,247,0.5);
-      opacity: 0.85;
-      z-index: 1;
-      animation: floatToken 4s ease-in-out infinite;
-    }
-
-    .tech-token:nth-child(1) { left: 12%; top: 34%; animation-delay: 0.2s; }
-    .tech-token:nth-child(2) { left: 72%; top: 20%; animation-delay: 1s; }
-    .tech-token:nth-child(3) { left: 66%; top: 60%; animation-delay: 1.8s; }
-    .tech-token:nth-child(4) { left: 32%; top: 72%; animation-delay: 2.5s; }
-    .tech-token:nth-child(5) { left: 48%; top: 26%; animation-delay: 3.1s; }
-    .tech-token:nth-child(6) { left: 18%; top: 62%; animation-delay: 0.8s; }
-    .tech-token:nth-child(7) { left: 80%; top: 43%; animation-delay: 2.1s; }
-    .tech-token:nth-child(8) { left: 58%; top: 74%; animation-delay: 1.3s; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
@@ -397,31 +190,17 @@
       0%, 100% { opacity: 0.2; transform: scale(0.8); }
       50% { opacity: 1; transform: scale(1.1); }
     }
-
-    @keyframes pulseDot {
-      0%, 100% { transform: scale(0.9); opacity: 0.8; }
-      50% { transform: scale(1.15); opacity: 1; }
-    }
-
-    @keyframes circuitPulse {
-      0% { opacity: 0.64; filter: drop-shadow(0 0 4px rgba(34,211,238,0.5)); }
-      100% { opacity: 1; filter: drop-shadow(0 0 10px rgba(168,85,247,0.7)); }
-    }
-
-    @keyframes floatToken {
-      0%, 100% { transform: translateY(0px) scale(0.9); opacity: 0.6; }
-      50% { transform: translateY(-12px) scale(1.1); opacity: 1; }
-    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
   <main class="max-w-md mx-auto w-full min-h-screen bg-[#080b14] flex flex-col relative pb-28 border-x border-slate-900/60 shadow-2xl">
 
+    <!-- HEADER -->
     <header class="sticky top-0 z-30 flex items-center justify-between px-4 py-3 bg-[#080b14]/90 backdrop-blur-xl border-b border-slate-800/80">
       <div class="flex items-center gap-3">
-        <button onclick="show('profile','Profil')" class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 via-indigo-600 to-cyan-400 p-[1.5px] transition active:scale-95 shadow-lg shadow-violet-500/30">
-          <div class="w-full h-full bg-[#080b14] rounded-[10.5px] flex items-center justify-center font-black text-transparent bg-clip-text bg-gradient-to-tr from-violet-400 to-cyan-300 text-lg tracking-tight">TP</div>
+        <button onclick="show('profile','Profil')" class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 via-indigo-600 to-cyan-400 p-[1.5px] transition active:scale-95 shadow-lg shadow-violet-500/50">
+          <div class="w-full h-full bg-[#080b14] rounded-[10.5px] flex items-center justify-center font-black text-transparent bg-clip-text bg-gradient-to-tr from-violet-400 to-cyan-300 text-lg tracking-tighter">TP</div>
         </button>
         <div>
           <p class="text-[9px] uppercase tracking-[0.25em] text-cyan-400 font-bold">TechnixPro</p>
@@ -440,6 +219,7 @@
       </div>
     </header>
 
+    <!-- PASEK PODZAKŁADEK DLA START -->
     <div id="home-subtabs" class="flex relative sticky top-[65px] z-20 bg-[#080b14]/95 backdrop-blur-md border-b border-slate-800/80">
       <button class="subtab py-2.5 text-xs font-semibold text-center text-[#b9a4ff]" onclick="sub('home','channel',this)">Kanał</button>
       <button class="subtab py-2.5 muted text-xs font-semibold text-center" onclick="sub('home','group',this)">Grupa</button>
@@ -447,6 +227,7 @@
       <div id="subtab-indicator" class="subtab-indicator"></div>
     </div>
 
+    <!-- PASEK PODZAKŁADEK DLA BONUSÓW -->
     <div id="gift-subtabs" class="hidden overflow-x-auto whitespace-nowrap scroll-none sticky top-[65px] z-20 bg-[#080b14]/95 backdrop-blur-md border-b border-slate-800/80 px-2">
       <button class="inline-block active-sub py-2.5 px-4 border-b-2 text-xs font-semibold" onclick="rewardTab('overview',this)">Przegląd</button>
       <button class="inline-block py-2.5 px-4 border-b-2 border-transparent muted text-xs font-semibold" onclick="rewardTab('events',this)">Eventy Live</button>
@@ -458,8 +239,10 @@
       <button class="inline-block py-2.5 px-4 border-b-2 border-transparent muted text-xs font-semibold" onclick="rewardTab('ranks',this)">Rangi</button>
     </div>
 
+    <!-- ZAWARTOŚĆ STRONY -->
     <div id="app-content" class="p-4 space-y-4 flex-1">
 
+      <!-- EKRAN GŁÓWNY (START) -->
       <section id="screen-home" class="screen space-y-4">
         <div id="home-channel" class="sub space-y-4">
           <div class="panel p-3.5 flex items-center justify-between">
@@ -476,34 +259,15 @@
               <span class="text-[10px] muted">Publikuj na Kanał</span>
             </div>
             <textarea id="admin-post-input" rows="3" class="w-full rounded-xl bg-[#080b14] border border-slate-700/80 p-3 text-xs text-slate-200 focus:outline-none focus:border-violet-500 resize-none" placeholder="Co nowego w TechnixPro?..."></textarea>
-            <input id="admin-media-input" type="text" class="w-full rounded-xl bg-[#080b14] border border-slate-700/80 p-2.5 text-xs text-slate-200 focus:outline-none focus:border-violet-500" placeholder="Opcjonalny link do grafiki/wideo (...)" />
+            <input id="admin-media-input" type="text" class="w-full rounded-xl bg-[#080b14] border border-slate-700/80 p-2.5 text-xs text-slate-200 focus:outline-none focus:border-violet-500" placeholder="Opcjonalny link do grafiki/wideo (URL)..." />
             <div class="flex justify-end">
-              <button onclick="publishChannelPost()" class="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition active:scale-95 flex items-center gap-2">
+              <button onclick="publishChannelPost()" class="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition active:scale-95 flex items-center gap-2 shadow-lg shadow-violet-600/30">
                 <i class="fa-solid fa-paper-plane text-[10px]"></i> Opublikuj Post
               </button>
             </div>
           </div>
 
-          <div id="channel-feed" class="space-y-4">
-            <div class="panel p-4 space-y-3">
-              <div class="flex justify-between items-center">
-                <span class="text-[10px] uppercase font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">Oficjalny Post #001</span>
-                <span class="text-[10px] muted">Dzisiaj, 02:18</span>
-              </div>
-              <h2 class="font-bold text-base text-slate-100">TechnixPro wchodzi w Fazę Stealth v2.6</h2>
-              <p class="text-xs muted leading-relaxed">Zbieraj TechnixCoins, wspinaj się po szczeblach poziomów i odblokuj unikalne rangi w ekosystemie TechnixPro. Nowe moduły społecznościowe są już aktywne.</p>
-              <div class="flex items-center gap-4 pt-2 text-xs border-t border-slate-800/60">
-                <button onclick="toggleLike(this)" class="flex items-center gap-1.5 muted hover:text-pink-400 transition active:scale-95">
-                  <i class="fa-regular fa-heart"></i>
-                  <span class="text-[11px]">142</span>
-                </button>
-                <button onclick="show('comments','Komentarze')" class="flex items-center gap-1.5 muted hover:text-cyan-400 transition active:scale-95">
-                  <i class="fa-regular fa-comment"></i>
-                  <span class="text-[11px]">98</span>
-                </button>
-              </div>
-            </div>
-          </div>
+          <div id="channel-feed" class="space-y-4"></div>
 
           <div class="panel p-4 mb-4 text-center">
             <h3 class="text-sm font-bold tracking-wider text-slate-300 uppercase mb-2">Bonus Czasowy</h3>
@@ -512,15 +276,15 @@
               <i class="fa-regular font-bold fa-clock text-lg"></i>
               <span id="bonus-timer">04:00:00</span>
             </div>
-            <button id="claim-bonus-btn" disabled class="w-full py-2.5 px-4 text-xs font-semibold rounded-lg bg-slate-700 text-slate-400 cursor-not-allowed transition-all duration-200">Odbierz +50 TechnixCoins</button>
+            <button id="claim-bonus-btn" onclick="claimTimeBonus()" disabled class="w-full py-2.5 px-4 text-xs font-semibold rounded-lg bg-slate-700 text-slate-400 cursor-not-allowed transition-all duration-200">Odbierz +50 TechnixCoins</button>
           </div>
         </div>
 
         <div id="home-group" class="sub hidden space-y-4">
           <div class="panel p-4 space-y-3">
             <h2 class="font-bold text-sm text-slate-200">Społeczność & Dyskusja</h2>
-            <p class="text-xs muted">Twoje wpisy są automatycznie zapisywane na tym urządzeniu (zabezpieczone Anti-XSS).</p>
-            <textarea id="post-input" rows="3" class="w-full rounded-xl bg-[#080b14] border border-slate-700/80 p-3 text-xs text-slate-200 focus:outline-none focus:border-violet-500 resize-none" placeholder="Napisz coś..."></textarea>
+            <p class="text-xs muted">Twoje wpisy są automatycznie zapisywane na tym urządzeniu.</p>
+            <textarea id="post-input" rows="3" class="w-full rounded-xl bg-[#080b14] border border-slate-700/80 p-3 text-xs text-slate-200 focus:outline-none focus:border-violet-500 resize-none" placeholder="Napisz wiadomość..."></textarea>
             <div class="flex justify-end">
               <button onclick="createNewPost()" class="bg-violet-600 hover:bg-violet-500 text-white text-xs font-semibold px-4 py-2 rounded-xl transition active:scale-95 flex items-center gap-2">
                 <i class="fa-solid fa-paper-plane text-[10px]"></i> Opublikuj
@@ -542,18 +306,10 @@
             <h2 class="text-xl font-extrabold text-white mt-1">TechnixPro Vision</h2>
             <p class="text-xs text-slate-300 max-w-xs mt-1">Niezależny procesor sprzętowy, cyfrowe aktywa i społeczność deweloperów.</p>
           </div>
-
-          <div class="panel p-4 space-y-3">
-            <h3 class="text-sm font-bold text-violet-300">Od rdzenia do całego ekosystemu</h3>
-            <p class="text-xs muted leading-relaxed">TechnixPro łączy innowacje sprzętowe z rynkiem krypto w komunikatorze Telegram. Zbieraj punkty XP, wykonuj zadania deweloperskie i przygotuj się do airdropu.</p>
-            <div class="rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 text-xs text-amber-200 flex gap-2">
-              <i class="fa-solid fa-triangle-exclamation text-amber-400 mt-0.5"></i>
-              <span>Projekt w fazie stealth. Wszystkie dane demo zostaną zsynchronizowane po starcie backendu.</span>
-            </div>
-          </div>
         </div>
       </section>
 
+      <!-- EKRAN BONUSÓW -->
       <section id="screen-gift" class="screen hidden space-y-4">
         <div id="reward-overview" class="reward-view space-y-4">
           <div class="panel p-4 relative overflow-hidden bg-gradient-to-br from-violet-900/40 via-slate-900 to-cyan-900/30">
@@ -583,30 +339,11 @@
                 <div id="xp-progress-bar" class="bg-gradient-to-r from-violet-500 to-cyan-400 h-full transition-all duration-500" style="width: 0%"></div>
               </div>
             </div>
-
-            <div class="grid grid-cols-3 gap-2 pt-2 text-center">
-              <div class="bg-slate-900/80 rounded-xl p-2.5 border border-slate-800">
-                <span class="block text-sm font-bold text-cyan-400">0 dni</span>
-                <span class="text-[9px] muted">Streak</span>
-              </div>
-              <div class="bg-slate-900/80 rounded-xl p-2.5 border border-slate-800">
-                <span class="block text-sm font-bold text-violet-400">0</span>
-                <span class="text-[9px] muted">Nagrody</span>
-              </div>
-              <div class="bg-slate-900/80 rounded-xl p-2.5 border border-slate-800">
-                <span class="block text-sm font-bold text-emerald-400">100%</span>
-                <span class="text-[9px] muted">Aktywność</span>
-              </div>
-            </div>
           </div>
         </div>
 
         <div id="reward-events" class="reward-view hidden space-y-3">
           <div class="panel p-4 space-y-3">
-            <div class="flex justify-between items-center">
-              <span class="text-[9px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded-full">AKTYWNY EVENT</span>
-              <span class="text-[10px] muted">Koniec za: 4 dni</span>
-            </div>
             <h3 class="text-base font-bold text-white">Cyber Week — Community Sprint</h3>
             <p class="text-xs muted">Wykonuj zadania społecznościowe, zbieraj punkty XP oraz odblokuj limitowaną odznakę.</p>
             <button onclick="triggerTaskAction('event',50,'Event')" class="w-full bg-violet-600 hover:bg-violet-500 text-white font-semibold text-xs py-2.5 rounded-xl transition active:scale-95">Dołącz do Sprintu</button>
@@ -623,20 +360,9 @@
         <div id="reward-referrals" class="reward-view hidden space-y-4">
           <div class="panel p-4 space-y-3">
             <h3 class="font-bold text-sm text-slate-200">Zapraszaj znajomych</h3>
-            <p class="text-xs muted">Zyskaj +100 XP za każdego nowego użytkownika dołączającego z Twojego linku polecającego.</p>
             <div class="flex items-center gap-2">
-              <input id="ref-link-input" type="text" readonly value="https://t.me/TechnixProBot?start=ref_user" class="w-full bg-[#080b14] border border-slate-700/80 rounded-xl p-2.5 text-xs font-mono text-cyan-300 focus:outline-none" />
+              <input id="ref-link-input" type="text" readonly value="https://t.me/TechnixProBot?start=ref_user" class="w-full bg-[#080b14] border border-slate-700/80 rounded-xl p-2.5 text-xs font-mono text-cyan-400 focus:outline-none" />
               <button onclick="copyReferralLink()" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs px-4 py-2.5 rounded-xl transition active:scale-95 shrink-0">Kopiuj</button>
-            </div>
-            <div class="pt-2 border-t border-slate-800 space-y-2">
-              <div class="flex justify-between items-center text-xs">
-                <span class="text-slate-300">Poleceni gracze:</span>
-                <span class="font-bold text-violet-400">0 osób</span>
-              </div>
-              <div class="flex justify-between items-center text-xs">
-                <span class="text-slate-300">Zdobyte XP z poleceń:</span>
-                <span class="font-bold text-emerald-400">+0 XP</span>
-              </div>
             </div>
           </div>
         </div>
@@ -649,17 +375,8 @@
                 <div>
                   <i class="fa-solid fa-gift text-cyan-400 text-lg"></i>
                   <span class="block font-bold text-xs mt-2">Bonus Dzienny</span>
-                  <span class="text-[10px] muted">+25 XP za logowanie</span>
                 </div>
                 <button onclick="claimReward('Bonus Dzienny', 25)" class="mt-3 text-xs text-violet-400 font-semibold text-left">Odbierz &rarr;</button>
-              </div>
-              <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3 flex flex-col justify-between opacity-60">
-                <div>
-                  <i class="fa-solid fa-award text-amber-400 text-lg"></i>
-                  <span class="block font-bold text-xs mt-2">Odznaka Pioniera</span>
-                  <span class="text-[10px] muted">Za udział w Faza Stealth</span>
-                </div>
-                <span class="mt-3 text-[10px] text-slate-500">Zablokowana</span>
               </div>
             </div>
           </div>
@@ -668,8 +385,7 @@
         <div id="reward-leaderboard" class="reward-view hidden space-y-3">
           <div class="panel p-4">
             <h3 class="font-bold text-sm text-slate-200">Ranking Społeczności</h3>
-            <p class="text-[10px] muted mb-3">Ranking odzwierciedla Twoje aktualne punkty XP w lokalnej sesji.</p>
-            <div class="space-y-2">
+            <div id="leaderboard-list" class="space-y-2 mt-3">
               <div class="flex items-center justify-between bg-violet-900/30 p-2.5 rounded-xl border border-violet-500/30 text-xs font-semibold">
                 <span id="rank-user-label">Ty (@User)</span>
                 <span id="rank-xp-display" class="font-bold text-violet-300">0 XP</span>
@@ -688,187 +404,159 @@
         <div id="reward-ranks" class="reward-view hidden space-y-4">
           <div class="panel p-4">
             <h3 class="text-base font-bold text-white mb-2">Poziomy i Rangi</h3>
-            <p class="text-xs text-slate-400 mb-4">Zbieraj Punkty Doświadczenia (XP), aby odblokowywać wyższe rangi i unikalne profity.</p>
-            <div class="space-y-3">
-              <div class="p-3 bg-slate-900/80 border border-amber-800/40 rounded-xl flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-lg bg-amber-900/30 text-amber-600 flex items-center justify-center font-bold text-sm border border-amber-800/30">BR</div>
-                  <div>
-                    <h4 class="text-sm font-semibold text-white">Brązowy Rekrut</h4>
-                    <p class="text-[10px] text-slate-400">Od 0 XP</p>
-                  </div>
-                </div>
-                <span class="text-xs font-semibold text-amber-500">Poziom 1</span>
-              </div>
-
-              <div class="p-3 bg-slate-900/80 border border-slate-700/40 rounded-xl flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-lg bg-slate-800 text-slate-300 flex items-center justify-center font-bold text-sm border border-slate-600/30">SR</div>
-                  <div>
-                    <h4 class="text-sm font-semibold text-white">Srebrny Operat</h4>
-                    <p class="text-[10px] text-slate-400">Od 1 000 XP</p>
-                  </div>
-                </div>
-                <span class="text-xs font-semibold text-slate-400">Poziom 2</span>
-              </div>
-
-              <div class="p-3 bg-slate-900/80 border border-yellow-600/40 rounded-xl flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-lg bg-yellow-900/30 text-yellow-500 flex items-center justify-center font-bold text-sm border border-yellow-600/30">ZL</div>
-                  <div>
-                    <h4 class="text-sm font-semibold text-white">Złoty Mistrz</h4>
-                    <p class="text-[10px] text-slate-400">Od 5 000 XP</p>
-                  </div>
-                </div>
-                <span class="text-xs font-semibold text-yellow-500">Poziom 3</span>
-              </div>
-
-              <div class="p-3 bg-slate-900/80 border border-cyan-500/40 rounded-xl flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-lg bg-cyan-950 text-cyan-400 flex items-center justify-center font-bold text-sm border border-cyan-500/30">DM</div>
-                  <div>
-                    <h4 class="text-sm font-semibold text-white">Diamentowy Lider</h4>
-                    <p class="text-[10px] text-slate-400">Od 20 000 XP</p>
-                  </div>
-                </div>
-                <span class="text-xs font-semibold text-cyan-400">Poziom 4</span>
-              </div>
-            </div>
+            <p class="text-xs text-slate-400 mb-4">Zbieraj Punkty Doświadczenia (XP), aby odblokowywać wyższe rangi.</p>
+            <div id="ranks-list" class="space-y-2"></div>
           </div>
         </div>
       </section>
 
+      <!-- ZAKŁADKA TECHNIXPRO MINING (HIGH-SPEED PROCESOR) -->
       <section id="screen-crypto" class="screen hidden space-y-4">
-        <div class="tech-header">
-          <div>
-            <p>Blockchain Core</p>
-            <h2>TechnixPro</h2>
+        <div class="flex justify-between items-center">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-microchip text-cyan-400 text-xl"></i>
+            <h2 class="text-lg font-bold text-white">TechnixPro Miner</h2>
           </div>
-          <div class="tech-status"><span class="pulse-dot"></span>Miner online</div>
+          <span class="text-[10px] text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20 font-mono">TURBO MODE</span>
         </div>
 
-        <div class="tech-panel panel p-4">
-          <div class="tech-screen-shell">
-            <div class="tech-circuit"></div>
-            <div class="tech-token"></div>
-            <div class="tech-token"></div>
-            <div class="tech-token"></div>
-            <div class="tech-token"></div>
-            <div class="tech-token"></div>
-            <div class="tech-token"></div>
-            <div class="tech-token"></div>
-            <div class="tech-token"></div>
-
-            <div class="tech-core">
-              <div class="tech-logo">TP</div>
-            </div>
-
-            <div class="tech-capsule">
-              <div id="tech-capsule-fill" class="tech-capsule-fill"></div>
-              <span id="tech-token-count">0</span>
-            </div>
+        <!-- KLIKALNY INTERAKTYWNY CPU -->
+        <div id="tp-cpu-trigger" onclick="manualMine(event)" class="tp-cpu-card rounded-2xl p-6 relative flex flex-col items-center justify-center min-h-[220px] overflow-hidden">
+          <div class="absolute top-0 inset-x-6 h-1.5 flex justify-between">
+            <div class="tp-pin w-3 h-full rounded-b"></div>
+            <div class="tp-pin w-3 h-full rounded-b"></div>
+            <div class="tp-pin w-3 h-full rounded-b"></div>
+            <div class="tp-pin w-3 h-full rounded-b"></div>
+            <div class="tp-pin w-3 h-full rounded-b"></div>
           </div>
 
-          <div class="tech-stats">
-            <div class="tech-stat-row">
-              <span>Wydobyto tokenów</span>
-              <strong id="tech-mined-value">0</strong>
+          <div class="absolute w-36 h-36 rounded-full bg-cyan-500/10 tp-pulse-ring"></div>
+          <div class="relative z-10 w-24 h-24 rounded-2xl bg-[#080b14] border-2 border-cyan-400 flex flex-col items-center justify-center shadow-lg shadow-cyan-500/30">
+            <i class="fa-solid fa-microchip text-3xl text-cyan-300"></i>
+            <span class="text-[9px] font-mono text-violet-400 mt-1 uppercase font-bold">STUKAJ!</span>
+          </div>
+
+          <div class="relative z-10 mt-4 text-center">
+            <p class="text-[10px] muted font-mono uppercase tracking-widest">Szybkość wydobycia</p>
+            <p id="tp-hashrate" class="text-xs font-bold text-cyan-300">1.00 TP/s</p>
+            <p id="tp-combo" class="text-[10px] font-black text-amber-400 mt-1 hidden animate-bounce">COMBO MULTIPLIER x1.0!</p>
+          </div>
+        </div>
+
+        <div class="panel p-4 space-y-4">
+          <div class="flex justify-between items-center bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+            <div>
+              <span class="text-[10px] muted block">Wykopane Tokeny TP</span>
+              <span id="tp-mined-tokens" class="text-2xl font-black text-white tracking-wider">0.0000</span>
             </div>
-            <div class="tech-stat-row">
-              <span>Limit airdropu</span>
-              <strong>100 000 000</strong>
-            </div>
-            <div class="tech-progress">
-              <div id="tech-progress-fill" class="tech-progress-fill"></div>
-            </div>
+            <span id="tp-status-badge" class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-1 rounded-full">Kopanie Aktywne</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <button id="tp-toggle-btn" onclick="toggleMining()" class="w-full bg-slate-800 hover:bg-slate-700 text-cyan-400 font-bold text-xs py-3 rounded-xl transition active:scale-95 border border-cyan-500/30">
+              Wstrzymaj CPU
+            </button>
+            <button onclick="turboUpgrade()" class="w-full bg-gradient-to-r from-violet-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-slate-950 font-black text-xs py-3 rounded-xl transition active:scale-95 shadow-lg shadow-cyan-500/20">
+              PRZYSPIESZ (+2.0/s)
+            </button>
           </div>
         </div>
       </section>
 
+      <!-- PORTFEL -->
       <section id="screen-wallet" class="screen hidden space-y-4">
         <h2 class="text-lg font-bold text-white">Portfel Cyfrowy</h2>
         <div class="panel p-5 text-center space-y-3">
-          <p class="text-xs muted">Saldo demonstracyjne sieci TON</p>
-          <div class="text-3xl font-extrabold text-white tracking-tight">0,00 PLN</div>
-          <div class="flex justify-center gap-2 pt-2">
-            <button onclick="showToast('Funkcja wpłaty zostanie odblokowana w Fazie 3')" class="bg-violet-600 text-xs font-semibold px-4 py-2 rounded-xl">Wpłać</button>
-            <button onclick="showToast('Funkcja wypłaty zostanie odblokowana w Fazie 3')" class="bg-slate-800 border border-slate-700 text-xs font-semibold px-4 py-2 rounded-xl">Wypłać</button>
-          </div>
-        </div>
-
-        <div class="panel p-4 space-y-3">
-          <h3 class="text-sm font-bold text-white flex items-center gap-2">
-            <i class="fa-solid fa-link text-cyan-400"></i> Połączenie TON Keeper
-          </h3>
-          <p class="text-xs muted">Podłącz swój portfel Web3, aby przygotować się do odbioru airdropa $TECHNIX.</p>
-          <button onclick="showToast('Moduł TON Connect zostanie zintegrowany w Fazie 3')" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold py-2.5 rounded-xl transition active:scale-95">Połącz portfel</button>
+          <p class="text-xs muted">Saldo TechnixCoins</p>
+          <div id="wallet-coins-balance" class="text-3xl font-extrabold text-cyan-400 tracking-tight">0 TC</div>
+          <p class="text-xs muted pt-2 border-t border-slate-800/80">Wykopane Tokeny TP</p>
+          <div id="wallet-tp-balance" class="text-xl font-bold text-violet-400">0.0000 TP</div>
         </div>
       </section>
 
+      <!-- PROFIL -->
       <section id="screen-profile" class="screen hidden space-y-4">
         <div class="panel p-5 text-center space-y-3">
-          <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-violet-600 to-cyan-400 p-0.5 shadow-lg shadow-violet-500/30">
+          <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-violet-600 to-cyan-400 p-0.5 shadow-lg">
             <div id="profile-avatar" class="w-full h-full bg-[#080b14] rounded-full flex items-center justify-center text-2xl text-cyan-400 font-bold">
               <i class="fa-solid fa-user"></i>
             </div>
           </div>
           <div>
-            <h2 id="profile-name" class="font-bold text-base text-white">Gostek</h2>
+            <h2 id="profile-name" class="font-bold text-base text-white">Użytkownik</h2>
             <p id="profile-id" class="text-xs muted">TG ID: brak danych</p>
           </div>
-        </div>
-
-        <div class="panel p-4 space-y-2">
-          <div class="flex justify-between items-center text-xs py-1">
-            <span class="muted">Twój Poziom:</span>
-            <span id="profile-level" class="font-bold text-violet-400">Level 1</span>
+          <div class="pt-3 border-t border-slate-800/80 flex justify-around text-xs">
+            <div>
+              <span class="block text-slate-400 text-[10px] uppercase">Poziom</span>
+              <span id="profile-level" class="font-bold text-violet-400">1</span>
+            </div>
+            <div>
+              <span class="block text-slate-400 text-[10px] uppercase">Punkty XP</span>
+              <span id="profile-xp" class="font-bold text-cyan-400">0</span>
+            </div>
           </div>
-          <div class="flex justify-between items-center text-xs py-1">
-            <span class="muted">Punkty XP:</span>
-            <span id="profile-xp" class="font-bold text-cyan-400">0 XP</span>
-          </div>
-        </div>
-
-        <div class="panel divide-y divide-slate-800/80 text-xs">
-          <button onclick="showToast('Informacje o koncie aktywne')" class="w-full p-3.5 text-left flex justify-between items-center text-slate-300">
-            <span>Ustawienia Profilu</span>
-            <i class="fa-solid fa-chevron-right text-[10px] muted"></i>
-          </button>
-          <button onclick="showToast('Bezpieczeństwo: Połączenie Telegram SSL')" class="w-full p-3.5 text-left flex justify-between items-center text-slate-300">
-            <span>Bezpieczeństwo & Dostęp</span>
-            <i class="fa-solid fa-chevron-right text-[10px] muted"></i>
-          </button>
         </div>
       </section>
 
+      <!-- MENU -->
       <section id="screen-menu" class="screen hidden space-y-4">
         <h2 class="text-lg font-bold text-white">Menu Główne</h2>
-        <div class="panel p-4 space-y-2 text-xs">
-          <button onclick="show('info','O Projekcie')" class="w-full p-2.5 rounded-xl bg-slate-900/60 text-left text-slate-200">O TechnixPro</button>
-          <button onclick="showToast('Kontakt: support@technix-pro.app')" class="w-full p-2.5 rounded-xl bg-slate-900/60 text-left text-slate-200">Wsparcie & Kontakt</button>
+        <div class="grid grid-cols-2 gap-3">
+          <button onclick="show('home','Sieć społeczna')" class="panel p-4 text-left space-y-2 hover:border-cyan-500/50 transition">
+            <i class="fa-solid fa-house text-cyan-400 text-xl"></i>
+            <span class="block text-xs font-bold text-white">Start</span>
+          </button>
+          <button onclick="show('gift','Rewards Hub')" class="panel p-4 text-left space-y-2 hover:border-cyan-500/50 transition">
+            <i class="fa-solid fa-gift text-cyan-400 text-xl"></i>
+            <span class="block text-xs font-bold text-white">Bonusy</span>
+          </button>
+          <button onclick="show('crypto','TechnixPro')" class="panel p-4 text-left space-y-2 hover:border-cyan-500/50 transition">
+            <i class="fa-solid fa-microchip text-cyan-400 text-xl"></i>
+            <span class="block text-xs font-bold text-white">Koparka TP</span>
+          </button>
+          <button onclick="show('wallet','Portfel')" class="panel p-4 text-left space-y-2 hover:border-cyan-500/50 transition">
+            <i class="fa-solid fa-wallet text-cyan-400 text-xl"></i>
+            <span class="block text-xs font-bold text-white">Portfel</span>
+          </button>
         </div>
       </section>
 
+      <!-- WYSZUKIWARKA -->
       <section id="screen-search" class="screen hidden space-y-4">
-        <input class="panel w-full p-3 text-xs bg-[#080b14] text-white border border-slate-700 rounded-xl focus:outline-none" placeholder="Szukaj w TechnixPro...">
+        <div class="relative">
+          <input id="search-input" oninput="performSearch()" class="panel w-full p-3 text-xs bg-[#080b14] text-white border border-slate-700 rounded-xl focus:outline-none focus:border-cyan-400" placeholder="Szukaj w TechnixPro...">
+        </div>
+        <div id="search-results" class="space-y-2"></div>
       </section>
 
+      <!-- POWIADOMIENIA -->
       <section id="screen-notifications" class="screen hidden space-y-4">
-        <div class="panel p-4 text-xs space-y-2">
-          <div class="font-bold text-white">Powiadomienie Systemowe</div>
-          <p class="muted">Witaj w TechnixPro! Połączyliśmy Twoje konto z interfejsem Telegram Mini App.</p>
+        <h2 class="text-lg font-bold text-white">Powiadomienia</h2>
+        <div id="notifications-list" class="space-y-2">
+          <div class="panel p-4 text-xs space-y-1">
+            <div class="font-bold text-white flex justify-between">
+              <span>Powiadomienie Systemowe</span>
+              <span class="text-[10px] muted">Teraz</span>
+            </div>
+            <p class="muted">Witaj w TechnixPro Core Engine!</p>
+          </div>
         </div>
       </section>
 
+      <!-- KOMENTARZE / ODP -->
       <section id="screen-comments" class="screen hidden space-y-4">
-        <h2 class="text-base font-bold text-white">Komentarze</h2>
-        <textarea class="panel w-full p-3 text-xs bg-[#080b14] border border-slate-700 rounded-xl focus:outline-none" rows="3" placeholder="Dodaj komentarz..."></textarea>
-        <button onclick="showToast('Komentarz został wysłany!')" class="bg-violet-600 text-xs font-semibold px-4 py-2 rounded-xl">Wyślij</button>
+        <div class="flex items-center gap-2">
+          <button onclick="show('home','Sieć społeczna')" class="text-xs text-cyan-400 font-semibold">&larr; Wróć</button>
+          <h2 class="text-base font-bold text-white">Komentarze</h2>
+        </div>
+        <div id="comments-container" class="space-y-3"></div>
       </section>
 
     </div>
 
-    <nav class="fixed bottom-0 left-0 right-0 z-40 max-w-md mx-auto bg-[#080b14]/95 backdrop-blur-xl border-t border-slate-800/80 px-2 pt-2 pb-[calc(0.75rem+env(safe-area-inset-bottom))] flex justify-between items-center gap-2">
+    <!-- DOLNY PASEK NAWIGACJI (SPÓJNA IKONA MICROCHIP) -->
+    <nav class="fixed bottom-0 left-0 right-0 z-40 max-w-md mx-auto bg-[#080b14]/95 backdrop-blur-xl border-t border-slate-800/80 px-2 pt-2 pb-[calc(0.75rem+env(safe-area-inset-bottom))] flex justify-around">
       <button class="nav-btn active flex flex-col items-center" data-tab="home" onclick="show('home','Sieć społeczna')">
         <i class="fa-solid fa-house text-base"></i>
         <span>Start</span>
@@ -878,7 +566,7 @@
         <span>Bonusy</span>
       </button>
       <button class="nav-btn flex flex-col items-center" data-tab="crypto" onclick="show('crypto','TechnixPro')">
-        <div class="tech-nav-mark"><span>TP</span></div>
+        <i class="fa-solid fa-microchip text-base"></i>
         <span>TechnixPro</span>
       </button>
       <button class="nav-btn flex flex-col items-center" data-tab="wallet" onclick="show('wallet','Portfel')">
@@ -898,6 +586,7 @@
 
   <div id="toast" class="hidden fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-slate-800/90 border border-slate-700/80 text-slate-100 text-xs font-medium px-4 py-2.5 rounded-xl shadow-xl backdrop-blur-md"></div>
 
+  <!-- JAVASCRIPT: LOGIKA APLIKACJI -->
   <script>
     const TelegramApp = window.Telegram?.WebApp;
     if (TelegramApp) {
@@ -905,33 +594,345 @@
       TelegramApp.expand();
     }
 
-    class CoinRow extends HTMLElement {
-      connectedCallback() {
-        const name = this.getAttribute('name');
-        const symbol = this.getAttribute('symbol');
-        const price = this.getAttribute('price');
-        const change = this.getAttribute('change');
-        const icon = this.getAttribute('icon');
-        const color = this.getAttribute('color') || 'text-violet-400';
+    // SYSTEM HIGH-SPEED KOPANIA
+    let tpMined = parseFloat(localStorage.getItem('tp_mined_tokens') || '0');
+    let tpsRate = parseFloat(localStorage.getItem('tp_rate') || '1.0');
+    let comboMultiplier = 1.0;
+    let lastClickTime = Date.now();
+    let isMining = true;
+    let minerInterval = null;
 
-        this.innerHTML = `
-          <div class="flex items-center justify-between py-2.5 border-b border-slate-800/60 last:border-none">
-            <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center font-bold ${color}">${icon}</div>
-              <div>
-                <span class="block text-xs font-bold text-white">${name}</span>
-                <span class="text-[10px] muted font-mono">${symbol}</span>
-              </div>
-            </div>
-            <div class="text-right">
-              <span class="block text-xs font-bold text-white">${price}</span>
-              <span class="text-[10px] font-medium text-emerald-400">${change}</span>
-            </div>
-          </div>
-        `;
+    // SYSTEM XP, NAGRÓD I PORTFELA
+    let userCoins = parseInt(localStorage.getItem('tp_user_coins') || '0');
+    let userXP = parseInt(localStorage.getItem('tp_user_xp') || '0');
+    let lastBonusClaim = parseInt(localStorage.getItem('tp_last_bonus') || '0');
+    const BONUS_INTERVAL = 4 * 60 * 60 * 1000; // 4 godziny
+
+    // DANE ZADAŃ
+    const defaultTasks = [
+      { id: 't1', title: 'Polub post na kanale', xp: 20, done: false },
+      { id: 't2', title: 'Napisz wiadomość w Grupie', xp: 30, done: false },
+      { id: 't3', title: 'Uruchom koparkę CPU', xp: 50, done: false }
+    ];
+
+    // GŁÓWNA PĘTLA WYDOBYCIA (ODŚWIEŻANIE CO 50ms)
+    function startMiningLogic() {
+      if (minerInterval) clearInterval(minerInterval);
+      minerInterval = setInterval(() => {
+        if (isMining) {
+          tpMined += (tpsRate * comboMultiplier) * 0.05;
+          localStorage.setItem('tp_mined_tokens', tpMined.toString());
+          const minedElem = document.getElementById('tp-mined-tokens');
+          if (minedElem) minedElem.textContent = tpMined.toFixed(4);
+        }
+
+        // REDUKCJA COMBO Z CZASEM BEZ KLIKANIA
+        if (Date.now() - lastClickTime > 800 && comboMultiplier > 1.0) {
+          comboMultiplier = Math.max(1.0, comboMultiplier - 0.1);
+          updateComboUI();
+        }
+      }, 50);
+    }
+
+    // MANULANE STUKANIE / KLIKANIE PROCESORA
+    function manualMine(event) {
+      if (!isMining) return;
+
+      const now = Date.now();
+      if (now - lastClickTime < 300) {
+        comboMultiplier = Math.min(10.0, comboMultiplier + 0.2);
+      }
+      lastClickTime = now;
+
+      const reward = (tpsRate * 0.5) * comboMultiplier;
+      tpMined += reward;
+
+      updateComboUI();
+      createParticle(event, `+${reward.toFixed(2)}`);
+    }
+
+    function updateComboUI() {
+      const comboElem = document.getElementById('tp-combo');
+      if (!comboElem) return;
+
+      if (comboMultiplier > 1.1) {
+        comboElem.classList.remove('hidden');
+        comboElem.textContent = `COMBO MULTIPLIER x${comboMultiplier.toFixed(1)}!`;
+      } else {
+        comboElem.classList.add('hidden');
       }
     }
-    customElements.define('coin-row', CoinRow);
+
+    function createParticle(e, text) {
+      const container = document.getElementById('tp-cpu-trigger');
+      if (!container) return;
+
+      const particle = document.createElement('div');
+      particle.className = 'click-particle';
+      particle.textContent = text;
+
+      const rect = container.getBoundingClientRect();
+      const x = (e ? e.clientX - rect.left : rect.width / 2) - 15;
+      const y = (e ? e.clientY - rect.top : rect.height / 2) - 10;
+
+      particle.style.left = `${x}px`;
+      particle.style.top = `${y}px`;
+
+      container.appendChild(particle);
+      setTimeout(() => particle.remove(), 600);
+    }
+
+    // HIGH-SPEED UPGRADE
+    function turboUpgrade() {
+      tpsRate += 2.0;
+      localStorage.setItem('tp_rate', tpsRate.toString());
+      const hashrateElem = document.getElementById('tp-hashrate');
+      if (hashrateElem) hashrateElem.textContent = `${tpsRate.toFixed(2)} TP/s`;
+      showToast(`🔥 TURBO PRZYSPIESZENIE! Nowa moc: ${tpsRate.toFixed(2)} TP/s`);
+    }
+
+    function toggleMining() {
+      isMining = !isMining;
+      const toggleBtn = document.getElementById('tp-toggle-btn');
+      const badge = document.getElementById('tp-status-badge');
+
+      if (isMining) {
+        if (toggleBtn) toggleBtn.textContent = 'Wstrzymaj CPU';
+        if (badge) {
+          badge.textContent = 'Kopanie Aktywne';
+          badge.className = 'text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-1 rounded-full';
+        }
+      } else {
+        if (toggleBtn) toggleBtn.textContent = 'Uruchom CPU';
+        if (badge) {
+          badge.textContent = 'CPU Wstrzymane';
+          badge.className = 'text-[10px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-1 rounded-full';
+        }
+      }
+    }
+
+    // LOGIKA BONUSU CZASOWEGO (4h)
+    function updateBonusTimer() {
+      const now = Date.now();
+      const diff = BONUS_INTERVAL - (now - lastBonusClaim);
+      const btn = document.getElementById('claim-bonus-btn');
+      const timerElem = document.getElementById('bonus-timer');
+
+      if (diff <= 0) {
+        if (timerElem) timerElem.textContent = "00:00:00";
+        if (btn) {
+          btn.disabled = false;
+          btn.className = "w-full py-2.5 px-4 text-xs font-semibold rounded-lg bg-gradient-to-r from-cyan-500 to-violet-600 text-slate-950 font-bold cursor-pointer transition-all duration-200 shadow-lg shadow-cyan-500/20 active:scale-95";
+        }
+      } else {
+        if (btn) {
+          btn.disabled = true;
+          btn.className = "w-full py-2.5 px-4 text-xs font-semibold rounded-lg bg-slate-700 text-slate-400 cursor-not-allowed transition-all duration-200";
+        }
+        const hrs = Math.floor(diff / (1000 * 60 * 60)).toString().padStart(2, '0');
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+        const secs = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        if (timerElem) timerElem.textContent = `${hrs}:${mins}:${secs}`;
+      }
+    }
+
+    function claimTimeBonus() {
+      const now = Date.now();
+      if (now - lastBonusClaim >= BONUS_INTERVAL) {
+        lastBonusClaim = now;
+        localStorage.setItem('tp_last_bonus', lastBonusClaim.toString());
+        userCoins += 50;
+        localStorage.setItem('tp_user_coins', userCoins.toString());
+        addXP(25, "Odbiór bonusu czasowego");
+        updateWalletUI();
+        showToast("🎁 Odebrano +50 TechnixCoins oraz +25 XP!");
+        updateBonusTimer();
+      }
+    }
+
+    // LOGIKA XP I POZIOMÓW
+    function addXP(amount, source) {
+      userXP += amount;
+      localStorage.setItem('tp_user_xp', userXP.toString());
+      logRewardHistory(source, amount);
+      updateXPUI();
+    }
+
+    function updateXPUI() {
+      const level = Math.floor(userXP / 1000) + 1;
+      const currentXPProgress = userXP % 1000;
+      const progressPercent = (currentXPProgress / 1000) * 100;
+
+      const xpTotal = document.getElementById('xp-total');
+      const levelBadge = document.getElementById('user-level-badge');
+      const progressText = document.getElementById('xp-progress-text');
+      const progressBar = document.getElementById('xp-progress-bar');
+      const rankXpDisplay = document.getElementById('rank-xp-display');
+      const profileLevel = document.getElementById('profile-level');
+      const profileXp = document.getElementById('profile-xp');
+
+      if (xpTotal) xpTotal.textContent = userXP;
+      if (levelBadge) levelBadge.textContent = `LEVEL ${level}`;
+      if (progressText) progressText.textContent = `${currentXPProgress} / 1 000 XP`;
+      if (progressBar) progressBar.style.width = `${progressPercent}%`;
+      if (rankXpDisplay) rankXpDisplay.textContent = `${userXP} XP`;
+      if (profileLevel) profileLevel.textContent = level;
+      if (profileXp) profileXp.textContent = userXP;
+
+      renderRanks();
+    }
+
+    function logRewardHistory(title, xp) {
+      const history = JSON.parse(localStorage.getItem('tp_reward_history') || '[]');
+      history.unshift({ title, xp, date: new Date().toLocaleTimeString('pl-PL') });
+      localStorage.setItem('tp_reward_history', JSON.stringify(history));
+      renderHistory();
+    }
+
+    function renderHistory() {
+      const logContainer = document.getElementById('reward-log');
+      if (!logContainer) return;
+      const history = JSON.parse(localStorage.getItem('tp_reward_history') || '[]');
+      if (history.length === 0) {
+        logContainer.innerHTML = `<p class="text-xs muted">Brak historii aktywności.</p>`;
+        return;
+      }
+      logContainer.innerHTML = history.slice(0, 10).map(item => `
+        <div class="flex justify-between items-center bg-slate-900/60 p-2.5 rounded-xl border border-slate-800 text-xs">
+          <div>
+            <span class="font-semibold text-slate-200 block">${sanitize(item.title)}</span>
+            <span class="text-[10px] muted">${item.date}</span>
+          </div>
+          <span class="font-bold text-violet-400">+${item.xp} XP</span>
+        </div>
+      `).join('');
+    }
+
+    // SYSTEM ZADAŃ
+    function renderTasks() {
+      const taskList = document.getElementById('task-list');
+      if (!taskList) return;
+      let tasks = JSON.parse(localStorage.getItem('tp_user_tasks') || 'null');
+      if (!tasks) {
+        tasks = defaultTasks;
+        localStorage.setItem('tp_user_tasks', JSON.stringify(tasks));
+      }
+
+      taskList.innerHTML = tasks.map(t => `
+        <div class="flex justify-between items-center bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-xs">
+          <div>
+            <span class="font-bold text-slate-200 block">${sanitize(t.title)}</span>
+            <span class="text-violet-400 font-semibold">+${t.xp} XP</span>
+          </div>
+          <button onclick="completeTask('${t.id}')" ${t.done ? 'disabled' : ''} class="${t.done ? 'bg-slate-800 text-slate-500 cursor-not-allowed' : 'bg-cyan-500 hover:bg-cyan-400 text-slate-950'} font-bold px-3 py-1.5 rounded-lg transition active:scale-95 text-[11px]">
+            ${t.done ? 'Ukończono' : 'Wykonaj'}
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function completeTask(taskId) {
+      let tasks = JSON.parse(localStorage.getItem('tp_user_tasks') || '[]');
+      const task = tasks.find(t => t.id === taskId);
+      if (task && !task.done) {
+        task.done = true;
+        localStorage.setItem('tp_user_tasks', JSON.stringify(tasks));
+        addXP(task.xp, `Zadanie: ${task.title}`);
+        showToast(`✅ Zadanie ukończone! (+${task.xp} XP)`);
+        renderTasks();
+      }
+    }
+
+    function triggerTaskAction(type, xp, title) {
+      addXP(xp, `Akcja: ${title}`);
+      showToast(`⚡ Dołączono do wydarzenia! (+${xp} XP)`);
+    }
+
+    function claimReward(name, xp) {
+      addXP(xp, `Odebranie nagrody: ${name}`);
+      showToast(`🎁 Odebrano: ${name} (+${xp} XP)`);
+    }
+
+    function copyReferralLink() {
+      const input = document.getElementById('ref-link-input');
+      if (input) {
+        input.select();
+        navigator.clipboard.writeText(input.value);
+        showToast("📋 Skopiowano link polecający!");
+      }
+    }
+
+    function renderRanks() {
+      const ranksContainer = document.getElementById('ranks-list');
+      if (!ranksContainer) return;
+      const currentLevel = Math.floor(userXP / 1000) + 1;
+      const ranks = [
+        { lvl: 1, title: 'Novice Core', desc: 'Początkujący użytkownik sieci' },
+        { lvl: 2, title: 'Cyber Miner', desc: 'Odblokowano wyższą wydajność CPU' },
+        { lvl: 3, title: 'Engine Master', desc: 'Pełny dostęp do węzła TechnixPro' },
+        { lvl: 5, title: 'Network Legend', desc: 'Elitarny status społeczności' }
+      ];
+
+      ranksContainer.innerHTML = ranks.map(r => `
+        <div class="flex items-center justify-between bg-slate-900/80 p-3 rounded-xl border ${currentLevel >= r.lvl ? 'border-violet-500/50 bg-violet-950/20' : 'border-slate-800 opacity-60'} text-xs">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-white">${r.title}</span>
+              <span class="text-[9px] bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded">Lvl ${r.lvl}</span>
+            </div>
+            <span class="text-[10px] muted block mt-0.5">${r.desc}</span>
+          </div>
+          ${currentLevel >= r.lvl ? '<i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>' : '<i class="fa-solid fa-lock text-slate-600 text-base"></i>'}
+        </div>
+      `).join('');
+    }
+
+    function updateWalletUI() {
+      const coinsElem = document.getElementById('wallet-coins-balance');
+      const tpElem = document.getElementById('wallet-tp-balance');
+      if (coinsElem) coinsElem.textContent = `${userCoins} TC`;
+      if (tpElem) tpElem.textContent = `${tpMined.toFixed(4)} TP`;
+    }
+
+    // SYSTEM WYSZUKIWARKI
+    function performSearch() {
+      const query = document.getElementById('search-input').value.toLowerCase().trim();
+      const resultsContainer = document.getElementById('search-results');
+      if (!resultsContainer) return;
+
+      if (!query) {
+        resultsContainer.innerHTML = '';
+        return;
+      }
+
+      const channelPosts = JSON.parse(localStorage.getItem('tp_channel_posts') || '[]');
+      const groupPosts = JSON.parse(localStorage.getItem(getUserStorageKey('posts')) || '[]');
+
+      const matchedChannel = channelPosts.filter(p => p.content.toLowerCase().includes(query));
+      const matchedGroup = groupPosts.filter(p => p.content.toLowerCase().includes(query));
+
+      let html = '';
+
+      if (matchedChannel.length > 0) {
+        html += `<p class="text-[10px] font-bold uppercase text-violet-400 mt-2">Wpisy z Kanału</p>`;
+        matchedChannel.forEach(p => {
+          html += `<div class="panel p-3 text-xs space-y-1"><p class="text-slate-200">${sanitize(p.content)}</p><span class="text-[9px] muted">${p.date}</span></div>`;
+        });
+      }
+
+      if (matchedGroup.length > 0) {
+        html += `<p class="text-[10px] font-bold uppercase text-cyan-400 mt-2">Wpisy z Grupy</p>`;
+        matchedGroup.forEach(p => {
+          html += `<div class="panel p-3 text-xs space-y-1"><p class="text-slate-200">${sanitize(p.content)}</p><span class="text-[9px] muted">${p.date}</span></div>`;
+        });
+      }
+
+      if (matchedChannel.length === 0 && matchedGroup.length === 0) {
+        html = `<p class="text-xs muted text-center py-4">Brak wyników dla "${sanitize(query)}".</p>`;
+      }
+
+      resultsContainer.innerHTML = html;
+    }
 
     function getUserStorageKey(suffix) {
       const userId = TelegramApp?.initDataUnsafe?.user?.id;
@@ -941,18 +942,6 @@
     function show(tab, title) {
       const homeTabs = document.getElementById('home-subtabs');
       const giftTabs = document.getElementById('gift-subtabs');
-
-      if (tab === 'info') {
-        document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
-        document.getElementById('screen-home')?.classList.remove('hidden');
-        homeTabs?.classList.remove('hidden');
-        giftTabs?.classList.add('hidden');
-        document.getElementById('header-title').textContent = title;
-        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.tab === 'home'));
-        sub('home', 'info', document.querySelector('#home-subtabs .subtab:last-child'));
-        window.scrollTo(0, 0);
-        return;
-      }
 
       document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
       const activeScreen = document.getElementById('screen-' + tab);
@@ -965,24 +954,12 @@
         btn.classList.toggle('active', btn.dataset.tab === tab);
       });
 
-      if (homeTabs) {
-        if (tab === 'home') homeTabs.classList.remove('hidden');
-        else homeTabs.classList.add('hidden');
-      }
+      if (homeTabs) homeTabs.classList.toggle('hidden', tab !== 'home');
+      if (giftTabs) giftTabs.classList.toggle('hidden', tab !== 'gift');
 
-      if (giftTabs) {
-        if (tab === 'gift') giftTabs.classList.remove('hidden');
-        else giftTabs.classList.add('hidden');
-      }
+      if (tab === 'wallet') updateWalletUI();
 
       window.scrollTo(0, 0);
-    }
-
-    function updateSubtabIndicator(btn) {
-      const indicator = document.getElementById('subtab-indicator');
-      if (!indicator || !btn) return;
-      indicator.style.width = `${btn.offsetWidth}px`;
-      indicator.style.left = `${btn.offsetLeft}px`;
     }
 
     function sub(parent, id, btn) {
@@ -997,7 +974,6 @@
         });
         btn.classList.remove('muted');
         btn.classList.add('text-[#b9a4ff]');
-        updateSubtabIndicator(btn);
       }
 
       if (id === 'group') renderPosts();
@@ -1014,8 +990,9 @@
         btn.classList.add('active-sub');
       }
 
-      if (id === 'tasks') renderTaskList();
-      if (id === 'history') renderRewardHistory();
+      if (id === 'tasks') renderTasks();
+      if (id === 'history') renderHistory();
+      if (id === 'ranks') renderRanks();
     }
 
     function showToast(message) {
@@ -1025,22 +1002,6 @@
       toast.classList.remove('hidden');
       clearTimeout(window.toastTimer);
       window.toastTimer = setTimeout(() => toast.classList.add('hidden'), 2200);
-    }
-
-    function toggleLike(btn) {
-      const icon = btn.querySelector('i');
-      const count = btn.querySelector('span');
-      const val = parseInt(count.textContent, 10) || 0;
-
-      if (icon.classList.contains('fa-regular')) {
-        icon.classList.replace('fa-regular', 'fa-solid');
-        btn.classList.add('text-pink-400');
-        count.textContent = String(val + 1);
-      } else {
-        icon.classList.replace('fa-solid', 'fa-regular');
-        btn.classList.remove('text-pink-400');
-        count.textContent = String(val - 1);
-      }
     }
 
     function sanitize(str) {
@@ -1053,296 +1014,91 @@
       const input = document.getElementById('admin-post-input');
       const mediaInput = document.getElementById('admin-media-input');
       const content = input.value.trim();
-      const mediaUrl = mediaInput.value.trim();
-
-      if (!content) return showToast('Wpisz treść ogłoszenia przed publikacją.');
+      if (!content) return showToast('Wpisz treść ogłoszenia.');
 
       const posts = JSON.parse(localStorage.getItem('tp_channel_posts') || '[]');
-      posts.unshift({
-        content,
-        mediaUrl,
-        date: new Date().toLocaleString('pl-PL'),
-        id: posts.length + 2
-      });
-
+      posts.unshift({ content, mediaUrl: mediaInput.value.trim(), date: new Date().toLocaleString('pl-PL'), id: posts.length + 1 });
       localStorage.setItem('tp_channel_posts', JSON.stringify(posts));
-      input.value = '';
-      mediaInput.value = '';
+      input.value = ''; mediaInput.value = '';
       renderChannelPosts();
-      showToast('Post został pomyślnie opublikowany na kanale!');
+      showToast('Opublikowano post!');
     }
 
     function renderChannelPosts() {
       const feed = document.getElementById('channel-feed');
       if (!feed) return;
-
       const customPosts = JSON.parse(localStorage.getItem('tp_channel_posts') || '[]');
-
-      const defaultPostHTML = `
+      feed.innerHTML = customPosts.map(p => `
         <div class="panel p-4 space-y-3">
           <div class="flex justify-between items-center">
-            <span class="text-[10px] uppercase font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">Oficjalny Post #001</span>
-            <span class="text-[10px] muted">Dzisiaj, 02:18</span>
-          </div>
-          <h2 class="font-bold text-base text-slate-100">TechnixPro wchodzi w Fazę Stealth v2.6</h2>
-          <p class="text-xs muted leading-relaxed">Zbieraj TechnixCoins, wspinaj się po szczeblach poziomów i odblokuj unikalne rangi w ekosystemie TechnixPro. Nowe moduły społecznościowe są już aktywne.</p>
-          <div class="flex items-center gap-4 pt-2 text-xs border-t border-slate-800/60">
-            <button onclick="toggleLike(this)" class="flex items-center gap-1.5 muted hover:text-pink-400 transition active:scale-95">
-              <i class="fa-regular fa-heart"></i>
-              <span class="text-[11px]">142</span>
-            </button>
-            <button onclick="show('comments','Komentarze')" class="flex items-center gap-1.5 muted hover:text-cyan-400 transition active:scale-95">
-              <i class="fa-regular fa-comment"></i>
-              <span class="text-[11px]">98</span>
-            </button>
-          </div>
-        </div>
-      `;
-
-      const renderedCustom = customPosts.map((p) => `
-        <div class="panel p-4 space-y-3">
-          <div class="flex justify-between items-center">
-            <span class="text-[10px] uppercase font-mono text-violet-400 bg-violet-500/10 px-2 py-0.5 rounded border border-violet-500/20">Oficjalny Post #${String(p.id).padStart(3, '0')}</span>
+            <span class="text-[10px] uppercase font-mono text-violet-400 bg-violet-500/10 px-2 py-0.5 rounded border border-violet-500/20">Post #${p.id}</span>
             <span class="text-[10px] muted">${p.date}</span>
           </div>
-          <p class="text-xs text-slate-200 whitespace-pre-wrap leading-relaxed">${sanitize(p.content)}</p>
-          ${p.mediaUrl ? `<div class="rounded-xl overflow-hidden border border-slate-800"><img src="${sanitize(p.mediaUrl)}" class="w-full h-auto object-cover max-h-52" alt="Post media" onerror="this.style.display='none'"></div>` : ''}
-          <div class="flex items-center justify-between pt-2 text-xs border-t border-slate-800/60">
-            <div class="flex items-center gap-4">
-              <button onclick="toggleLike(this)" class="flex items-center gap-1.5 muted hover:text-pink-400 transition active:scale-95">
-                <i class="fa-regular fa-heart"></i>
-                <span class="text-[11px]">0</span>
-              </button>
-              <button onclick="show('comments','Komentarze')" class="flex items-center gap-1.5 muted hover:text-cyan-400 transition active:scale-95">
-                <i class="fa-regular fa-comment"></i>
-                <span class="text-[11px]">0</span>
-              </button>
-            </div>
-          </div>
+          ${p.mediaUrl ? `<img src="${sanitize(p.mediaUrl)}" class="w-full h-auto rounded-xl max-h-48 object-cover border border-slate-800" alt="Media" />` : ''}
+          <p class="text-xs text-slate-200 whitespace-pre-wrap">${sanitize(p.content)}</p>
         </div>
       `).join('');
-
-      feed.innerHTML = renderedCustom + defaultPostHTML;
     }
 
     function createNewPost() {
       const input = document.getElementById('post-input');
       const content = input.value.trim();
-      if (!content) return showToast('Wpisz treść posta przed publikacją.');
-
+      if (!content) return;
       const key = getUserStorageKey('posts');
       const posts = JSON.parse(localStorage.getItem(key) || '[]');
-      const username = TelegramApp?.initDataUnsafe?.user?.first_name || 'Użytkownik';
-      posts.unshift({ author: username, content, date: new Date().toLocaleString('pl-PL') });
+      posts.unshift({ author: 'Użytkownik', content, date: new Date().toLocaleString('pl-PL') });
       localStorage.setItem(key, JSON.stringify(posts));
       input.value = '';
       renderPosts();
-      showToast('Post został pomyślnie opublikowany.');
     }
 
     function renderPosts() {
       const feed = document.getElementById('posts-feed');
       if (!feed) return;
-
       const key = getUserStorageKey('posts');
       const posts = JSON.parse(localStorage.getItem(key) || '[]');
-      if (!posts.length) {
-        feed.innerHTML = '<div class="panel p-4 text-center text-xs muted">Brak postów. Bądź pierwszy!</div>';
-        return;
-      }
-
-      feed.innerHTML = posts.map((p, idx) => `
+      feed.innerHTML = posts.map(p => `
         <article class="panel p-4 space-y-2">
           <div class="flex justify-between items-center text-xs">
-            <span class="font-bold text-violet-300">${sanitize(p.author || 'TechnixUser')}</span>
+            <span class="font-bold text-violet-300">${sanitize(p.author)}</span>
             <span class="text-[10px] muted">${p.date}</span>
           </div>
-          <p class="text-xs text-slate-200 whitespace-pre-wrap leading-relaxed">${sanitize(p.content)}</p>
-          <div class="flex justify-end pt-1">
-            <button onclick="removePost(${idx})" class="text-[10px] text-slate-500 hover:text-red-400 transition">
-              <i class="fa-regular fa-trash-can"></i> Usuń
-            </button>
-          </div>
+          <p class="text-xs text-slate-200">${sanitize(p.content)}</p>
         </article>
       `).join('');
     }
 
-    function removePost(index) {
-      const key = getUserStorageKey('posts');
-      const posts = JSON.parse(localStorage.getItem(key) || '[]');
-      posts.splice(index, 1);
-      localStorage.setItem(key, JSON.stringify(posts));
-      renderPosts();
-      showToast('Post usunięty.');
-    }
-
-    function copyReferralLink() {
-      const input = document.getElementById('ref-link-input');
-      if (!input) return;
-      input.select();
-      navigator.clipboard.writeText(input.value).then(() => {
-        showToast('Link polecający został skopiowany!');
-      }).catch(() => {
-        showToast('Skopiowano do schowka.');
-      });
-    }
-
-    function getXP() {
-      const key = getUserStorageKey('xp');
-      return Number(localStorage.getItem(key) || 0);
-    }
-
-    function addXP(amount, reason) {
-      const key = getUserStorageKey('xp');
-      const current = getXP();
-      const updated = current + amount;
-      localStorage.setItem(key, String(updated));
-
-      const logKey = getUserStorageKey('reward_logs');
-      const logs = JSON.parse(localStorage.getItem(logKey) || '[]');
-      logs.unshift({ reason, amount, date: new Date().toLocaleString('pl-PL') });
-      localStorage.setItem(logKey, JSON.stringify(logs));
-
-      updateXPDisplay();
-      showToast(`+${amount} XP: ${reason}`);
-    }
-
-    function updateXPDisplay() {
-      const xp = getXP();
-      const xpTotal = document.getElementById('xp-total');
-      const xpProgressText = document.getElementById('xp-progress-text');
-      const rankDisplay = document.getElementById('rank-xp-display');
-      const progressBar = document.getElementById('xp-progress-bar');
-      const profileXp = document.getElementById('profile-xp');
-      const userLevelBadge = document.getElementById('user-level-badge');
-      const profileLevel = document.getElementById('profile-level');
-
-      let level = 1;
-      if (xp >= 20000) level = 4;
-      else if (xp >= 5000) level = 3;
-      else if (xp >= 1000) level = 2;
-
-      if (xpTotal) xpTotal.textContent = xp.toLocaleString();
-      if (xpProgressText) xpProgressText.textContent = `${xp.toLocaleString()} / 1 000 XP`;
-      if (rankDisplay) rankDisplay.textContent = `${xp.toLocaleString()} XP`;
-      if (profileXp) profileXp.textContent = `${xp.toLocaleString()} XP`;
-      if (userLevelBadge) userLevelBadge.textContent = `LEVEL ${level}`;
-      if (profileLevel) profileLevel.textContent = `Level ${level}`;
-
-      if (progressBar) {
-        const percentage = Math.min((xp / 1000) * 100, 100);
-        progressBar.style.width = `${percentage}%`;
-      }
-    }
-
-    function claimReward(name, amount) {
-      const claimedKey = getUserStorageKey('claimed_' + name);
-      if (localStorage.getItem(claimedKey)) return showToast('Ta nagroda została już odebrana.');
-
-      localStorage.setItem(claimedKey, 'true');
-      addXP(amount, name);
-    }
-
-    function renderTaskList() {
-      const taskKey = getUserStorageKey('tasks');
-      const completed = JSON.parse(localStorage.getItem(taskKey) || '[]');
-      const tasks = [
-        ['login', 'Zaloguj się codziennie', 25],
-        ['post', 'Opublikuj post w Grupie', 50],
-        ['visit_info', 'Odwiedź zakładkę Info', 25]
-      ];
-
-      const taskList = document.getElementById('task-list');
-      if (!taskList) return;
-
-      taskList.innerHTML = tasks.map(([id, label, xp]) => {
-        const done = completed.includes(id);
-        return `
-          <div class="flex items-center justify-between bg-slate-900/70 border border-slate-800 rounded-xl p-2.5">
-            <div>
-              <div class="text-[11px] text-slate-100 font-medium">${label}</div>
-              <div class="text-[10px] text-violet-300">+${xp} XP</div>
-            </div>
-            <button onclick="triggerTaskAction('${id}', ${xp}, '${label}')" class="text-[10px] ${done ? 'text-emerald-400' : 'text-cyan-300'} font-semibold">
-              ${done ? 'Gotowe' : 'Wykonaj'}
-            </button>
-          </div>
-        `;
-      }).join('');
-    }
-
-    function triggerTaskAction(taskId, xp, label) {
-      const key = getUserStorageKey('tasks');
-      const completed = JSON.parse(localStorage.getItem(key) || '[]');
-      if (completed.includes(taskId)) return showToast('To zadanie jest już ukończone.');
-
-      completed.push(taskId);
-      localStorage.setItem(key, JSON.stringify(completed));
-      addXP(xp, label);
-      renderTaskList();
-    }
-
-    function renderRewardHistory() {
-      const log = document.getElementById('reward-log');
-      if (!log) return;
-
-      const key = getUserStorageKey('reward_logs');
-      const logs = JSON.parse(localStorage.getItem(key) || '[]');
-
-      if (!logs.length) {
-        log.innerHTML = '<div class="text-[10px] muted text-center py-3">Brak historii nagród.</div>';
-        return;
-      }
-
-      log.innerHTML = logs.map(item => `
-        <div class="flex justify-between items-center bg-slate-900/70 border border-slate-800 rounded-xl p-2.5 text-[10px]">
-          <span class="text-slate-200">${item.reason}</span>
-          <span class="font-bold text-emerald-400">+${item.amount} XP</span>
-        </div>
-      `).join('');
-    }
-
-    function animateTechnixMining() {
-      const target = 100000000;
-      const tokenCount = document.getElementById('tech-token-count');
-      const minedValue = document.getElementById('tech-mined-value');
-      const fill = document.getElementById('tech-capsule-fill');
-      const progressFill = document.getElementById('tech-progress-fill');
-
-      if (!tokenCount || !minedValue || !fill || !progressFill) return;
-
-      let start = null;
-      const duration = 7000;
-
-      function step(timestamp) {
-        if (!start) start = timestamp;
-        const progress = Math.min((timestamp - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 4);
-        const value = Math.floor(target * eased);
-
-        tokenCount.textContent = value.toLocaleString('pl-PL');
-        minedValue.textContent = value.toLocaleString('pl-PL');
-
-        const pct = (value / target) * 100;
-        fill.style.width = `${pct}%`;
-        progressFill.style.width = `${pct}%`;
-
-        if (progress < 1) requestAnimationFrame(step);
-      }
-
-      requestAnimationFrame(step);
-    }
-
-    function initApp() {
-      updateXPDisplay();
+    // INICJALIZACJA APLIKACJI
+    document.addEventListener('DOMContentLoaded', () => {
       renderPosts();
       renderChannelPosts();
-      renderTaskList();
-      renderRewardHistory();
-      animateTechnixMining();
-    }
+      startMiningLogic();
+      updateXPUI();
+      updateWalletUI();
+      updateBonusTimer();
+      setInterval(updateBonusTimer, 1000);
 
-    initApp();
+      const minedElem = document.getElementById('tp-mined-tokens');
+      if (minedElem) minedElem.textContent = tpMined.toFixed(4);
+
+      const hashrateElem = document.getElementById('tp-hashrate');
+      if (hashrateElem) hashrateElem.textContent = `${tpsRate.toFixed(2)} TP/s`;
+
+      if (TelegramApp && TelegramApp.initDataUnsafe?.user) {
+        const user = TelegramApp.initDataUnsafe.user;
+        const profileName = document.getElementById('profile-name');
+        const profileId = document.getElementById('profile-id');
+        const tgUsername = document.getElementById('telegram-username');
+        const rankUserLabel = document.getElementById('rank-user-label');
+
+        const usernameText = user.username ? `@${user.username}` : (user.first_name || 'Użytkownik');
+
+        if (profileName) profileName.textContent = user.first_name || 'Użytkownik';
+        if (profileId) profileId.textContent = `TG ID: #${user.id}`;
+        if (tgUsername) tgUsername.textContent = usernameText;
+        if (rankUserLabel) rankUserLabel.textContent = `Ty (${usernameText})`;
+      }
+    });
   </script>
 </body>
 </html>
