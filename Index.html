@@ -104,6 +104,80 @@
       .pulse-border {
         box-shadow: 0 0 0 1px rgba(34,211,238,0.25), 0 0 24px rgba(168,85,247,0.18);
       }
+      .chat-shell {
+        background: rgba(8,11,20,0.7);
+        border: 1px solid rgba(148,163,184,0.08);
+        border-radius: 22px;
+        overflow: hidden;
+      }
+      .chat-message {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      .chat-message.self {
+        flex-direction: row-reverse;
+      }
+      .chat-avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: 800;
+        background: linear-gradient(135deg, rgba(34,211,238,0.8), rgba(168,85,247,0.75));
+        color: #fff;
+        flex-shrink: 0;
+      }
+      .chat-bubble {
+        max-width: 78%;
+        border-radius: 16px;
+        padding: 10px 12px;
+        background: rgba(15, 23, 42, 0.85);
+        border: 1px solid rgba(148,163,184,0.08);
+      }
+      .chat-message.self .chat-bubble {
+        background: linear-gradient(135deg, rgba(91,67,201,0.45), rgba(34,211,238,0.18));
+        border-color: rgba(34,211,238,0.22);
+      }
+      .reply-preview {
+        margin-bottom: 8px;
+        padding: 7px 8px;
+        border-left: 2px solid rgba(34,211,238,0.7);
+        border-radius: 8px;
+        background: rgba(15,23,42,0.5);
+        font-size: 10px;
+        color: #cbd5e1;
+      }
+      .phase-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 18px;
+        border: 1px solid rgba(148,163,184,0.12);
+        background: rgba(15,23,42,0.72);
+        padding: 16px;
+      }
+      .phase-card.active {
+        border-color: rgba(52,211,153,0.4);
+        background: linear-gradient(135deg, rgba(6,78,59,0.35), rgba(15,23,42,0.75));
+      }
+      .phase-card.locked {
+        opacity: 0.7;
+        filter: grayscale(0.08);
+      }
+      .phase-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border-radius: 999px;
+        padding: 5px 9px;
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
       @keyframes fadeIn {
         from { opacity: 0; transform: translateY(6px); }
         to { opacity: 1; transform: translateY(0); }
@@ -182,6 +256,13 @@
                 <button id="publish-post-btn" class="rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 px-3 py-2.5 text-xs font-bold text-white shadow-lg shadow-violet-500/20">Opublikuj post</button>
                 <button id="add-highlight-btn" class="rounded-xl border border-white/10 bg-slate-950/60 px-3 py-2.5 text-xs font-bold text-slate-200">Dodaj highlight</button>
               </div>
+
+              <div class="grid grid-cols-2 gap-2 pt-2 border-t border-white/10">
+                <button id="save-draft-btn" class="rounded-xl border border-white/10 bg-slate-950/60 px-3 py-2 text-[10px] uppercase tracking-[0.12em] font-bold text-slate-200">Zapisz szkic</button>
+                <button id="schedule-post-btn" class="rounded-xl border border-cyan-500/40 bg-cyan-500/10 px-3 py-2 text-[10px] uppercase tracking-[0.12em] font-bold text-cyan-100">Zaplanuj</button>
+              </div>
+
+              <div id="draft-list" class="space-y-2 hidden"></div>
             </div>
 
             <div class="panel p-4 space-y-3">
@@ -235,34 +316,46 @@
 
         <section id="screen-group" class="screen hidden">
           <div class="px-4 pt-4 pb-24">
-            <div class="panel p-4 space-y-3">
-              <div class="flex items-center justify-between">
-                <h2 class="text-lg font-bold text-white">Grupa</h2>
-                <span class="rounded-full border border-cyan-500/40 bg-cyan-500/10 px-2 py-1 text-[8px] uppercase tracking-[0.12em] text-cyan-200">Aktywna</span>
+            <div class="chat-shell p-3">
+              <div class="flex items-center justify-between border-b border-white/5 pb-3 mb-3">
+                <div>
+                  <p class="text-[9px] uppercase tracking-[0.14em] text-cyan-300 font-bold">TechnixPro</p>
+                  <h2 class="text-base font-bold text-white">Grupa</h2>
+                </div>
+                <span class="rounded-full border border-emerald-500/40 bg-emerald-500/10 px-2 py-1 text-[8px] uppercase tracking-[0.12em] text-emerald-200">Aktywna</span>
               </div>
-              <div class="rounded-xl border border-white/10 bg-slate-950/60 p-3 text-sm text-slate-300">
-                W tej sekcji usunięto panel bonusu czasowego i przeniesiono publikację na dół ekranu, aby użytkownicy mogli łatwiej wchodzić w interakcję.
-              </div>
+
+              <div id="group-chat" class="space-y-3"></div>
             </div>
           </div>
         </section>
 
         <section id="screen-info" class="screen hidden">
-          <div class="px-4 pt-4">
+          <div class="px-4 pt-4 space-y-4 pb-24">
             <div class="panel p-4">
-              <h2 class="text-lg font-bold text-white">Informacje</h2>
-              <p class="mt-2 text-sm text-slate-300">TechnixPro — platforma publikacji i komunikacji wewnętrznej dla użytkowników Telegram WebApp.</p>
+              <p class="text-[9px] uppercase tracking-[0.18em] text-cyan-400 font-bold">Roadmap</p>
+              <h2 class="text-xl font-extrabold text-white mt-2">TechnixPro — plan rozwoju ekosystemu</h2>
+              <p class="mt-3 text-sm text-slate-300 leading-6">
+                TechnixPro łączy innowacje sprzętowe, komunikację społecznościową i mechanikę aktywności w jednym ekosystemie. Projekt jest budowany etapowo, aby każda kolejna część miała mocne fundamenty i mogła być rozbudowywana bez chaosu. W pierwszym etapie skupiamy się na funkcjach, które budują bazę produktu: panel administratora, publikacje, komunikacja w grupie, zadania, eventy live i pierwsze elementy ekosystemu reward.
+              </p>
             </div>
+
+            <div id="phase-list" class="space-y-3"></div>
           </div>
         </section>
       </main>
 
       <div id="group-composer" class="group-composer hidden">
         <div class="panel p-3 pulse-border">
-          <textarea id="group-input" rows="2" class="w-full rounded-xl border border-white/10 bg-slate-950/70 p-3 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-violet-500" placeholder="Napisz coś dla grupy..."></textarea>
+          <div id="reply-preview" class="hidden rounded-xl border border-cyan-500/30 bg-cyan-500/10 p-2 text-[10px] text-cyan-100">
+            <span class="font-bold">Odpowiedź do:</span>
+            <span id="reply-preview-text"> </span>
+            <button id="cancel-reply-btn" class="ml-2 text-[9px] uppercase tracking-[0.12em] text-cyan-200">Anuluj</button>
+          </div>
+          <textarea id="group-input" rows="2" class="mt-2 w-full rounded-xl border border-white/10 bg-slate-950/70 p-3 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-violet-500" placeholder="Napisz wiadomość do grupy..."></textarea>
           <div class="mt-3 flex items-center justify-between gap-2">
             <button id="attach-media-btn" class="flex items-center gap-2 rounded-xl border border-white/10 bg-slate-900/80 px-3 py-2 text-[10px] uppercase tracking-[0.12em] text-slate-300"><i class="fa-solid fa-paperclip"></i> Media</button>
-            <button id="group-publish-btn" class="rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 px-4 py-2 text-[10px] uppercase tracking-[0.12em] font-bold text-white">Opublikuj</button>
+            <button id="group-publish-btn" class="rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 px-4 py-2 text-[10px] uppercase tracking-[0.12em] font-bold text-white">Wyślij</button>
           </div>
         </div>
       </div>
@@ -297,10 +390,74 @@
         }
       ];
 
+      let drafts = [
+        'Szkic: utrwalenie wydarzenia launch i komunikat w kanale',
+        'Szkic: podsumowanie aktywności społeczności za ostatnie 24h'
+      ];
+
       let groupMessages = [
-        { author: 'Marta', text: 'Widziałam już nowy panel, wygląda bardzo dobrze!', reactions: { like: 7, fire: 2 } },
-        { author: 'Kamil', text: 'Dzięki za update. Jesteśmy gotowi na kolejną rundę współpracy.', reactions: { like: 12, fire: 5 } },
-        { author: 'Alicja', text: 'Najlepsza część to szybkie reagowanie na komunikaty.', reactions: { like: 9, fire: 1 } }
+        {
+          id: 'g1',
+          author: 'Marta',
+          text: 'Widziałam już nowy panel, wygląda bardzo dobrze!',
+          time: '10:41',
+          self: false,
+          reactions: { like: 7, fire: 2 },
+          replyTo: null
+        },
+        {
+          id: 'g2',
+          author: 'Kamil',
+          text: 'Dzięki za update. Jesteśmy gotowi na kolejną rundę współpracy.',
+          time: '10:48',
+          self: false,
+          reactions: { like: 12, fire: 5 },
+          replyTo: 'g1'
+        },
+        {
+          id: 'g3',
+          author: 'Alicja',
+          text: 'Najlepsza część to szybkie reagowanie na komunikaty.',
+          time: '10:52',
+          self: false,
+          reactions: { like: 9, fire: 1 },
+          replyTo: null
+        }
+      ];
+
+      let replyTargetId = null;
+
+      const phaseBlueprints = [
+        {
+          id: 1,
+          name: 'Faza 1',
+          label: 'Core Launch',
+          status: 'Aktywna',
+          active: true,
+          locked: false,
+          description: 'Tworzymy bazę produktu: panel administratora, publikacje, feed, komunikacja w grupie, eventy live, zadania i pierwsze mechaniki reward. To jest moment, w którym ustalamy fundamenty i stabilność działania.',
+          features: ['Panel administratora', 'Publiczny kanał i posty', 'Zadania i eventy live', 'Podstawowe reakcje i feed', 'Reward system beta']
+        },
+        {
+          id: 2,
+          name: 'Faza 2',
+          label: 'Expansion Engine',
+          status: 'Zablokowana',
+          active: false,
+          locked: true,
+          description: 'Po zakończeniu etapu pierwszego rozbudowujemy system partnerstw, automatyzacji publikacji i dodatkowych narzędzi do zarządzania społecznością oraz aktywności. Dodajemy mechanizmy wzrostu i większą integrację z użytkownikami.',
+          features: ['Planowanie publikacji', 'Zaawansowana automatyzacja', 'Integracja z grupami i eventami', 'Rozszerzone statystyki', 'Wzmocniona komunikacja']
+        },
+        {
+          id: 3,
+          name: 'Faza 3',
+          label: 'Full Ecosystem',
+          status: 'Zablokowana',
+          active: false,
+          locked: true,
+          description: 'To etap pełnej integracji ekosystemu: wallet, mining, marketplace, airdrop i rozbudowany model ekonomiczny. W tej fazie projekt będzie już dostarczany jako kompletny i spójny system z rozbudowaną logiką użytkową.',
+          features: ['Portfel i monety', 'Mining / treasury', 'Airdrop i aktywa', 'Ekosystem marketplace', 'Faza pełnej integracji']
+        }
       ];
 
       function randomId() {
@@ -325,11 +482,35 @@
 
       function updateAdminVisibility() {
         const panel = document.getElementById('admin-panel');
-        if (isAdmin) {
-          panel.classList.remove('hidden');
-        } else {
-          panel.classList.add('hidden');
+        panel.classList.toggle('hidden', !isAdmin);
+        const draftList = document.getElementById('draft-list');
+        draftList.classList.toggle('hidden', !isAdmin || drafts.length === 0);
+      }
+
+      function renderDrafts() {
+        const draftList = document.getElementById('draft-list');
+        if (!isAdmin) {
+          draftList.innerHTML = '';
+          return;
         }
+
+        draftList.innerHTML = drafts.map((draft, index) => `
+          <div class="rounded-xl border border-white/10 bg-slate-950/60 p-2">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-[10px] uppercase tracking-[0.12em] text-violet-300">Szkic ${index + 1}</span>
+              <button class="draft-use text-[9px] uppercase tracking-[0.12em] text-cyan-200" data-index="${index}">Wstaw</button>
+            </div>
+            <p class="mt-2 text-xs text-slate-200">${draft}</p>
+          </div>
+        `).join('');
+
+        document.querySelectorAll('.draft-use').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const idx = Number(btn.dataset.index);
+            const input = document.getElementById('admin-post-input');
+            input.value = drafts[idx];
+          });
+        });
       }
 
       function renderTasks() {
@@ -358,8 +539,8 @@
         const count = document.getElementById('post-count');
         count.textContent = `${posts.length}`;
 
-        feed.innerHTML = posts.map(post => `
-          <article class="rounded-2xl border border-white/10 bg-slate-950/60 p-3">
+        feed.innerHTML = posts.map((post, postIndex) => `
+          <article class="rounded-2xl border border-white/10 bg-slate-950/60 p-3" data-post-index="${postIndex}">
             <div class="flex items-center justify-between gap-2 mb-2">
               <div class="flex items-center gap-2">
                 <div class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center text-[10px] font-bold text-white">${post.author.slice(0, 1).toUpperCase()}</div>
@@ -378,9 +559,9 @@
             ${post.attachment ? `<a href="${post.attachment}" class="mt-3 inline-flex w-full items-center justify-between rounded-xl border border-violet-500/30 bg-violet-500/10 px-3 py-2 text-xs text-violet-100" target="_blank" rel="noreferrer"><span>Załącznik</span><i class="fa-solid fa-arrow-up-right-from-square"></i></a>` : ''}
 
             <div class="mt-3 flex items-center gap-2">
-              <button class="reaction-btn rounded-full border border-white/10 bg-slate-900/80 px-2 py-1 text-[10px] text-slate-200" data-kind="like">👍 ${post.reactions.like}</button>
-              <button class="reaction-btn rounded-full border border-white/10 bg-slate-900/80 px-2 py-1 text-[10px] text-slate-200" data-kind="fire">🔥 ${post.reactions.fire}</button>
-              <button class="reaction-btn rounded-full border border-white/10 bg-slate-900/80 px-2 py-1 text-[10px] text-slate-200" data-kind="love">💜 ${post.reactions.love}</button>
+              <button class="reaction-btn rounded-full border border-white/10 bg-slate-900/80 px-2 py-1 text-[10px] text-slate-200" data-kind="like" data-post-index="${postIndex}">👍 ${post.reactions.like}</button>
+              <button class="reaction-btn rounded-full border border-white/10 bg-slate-900/80 px-2 py-1 text-[10px] text-slate-200" data-kind="fire" data-post-index="${postIndex}">🔥 ${post.reactions.fire}</button>
+              <button class="reaction-btn rounded-full border border-white/10 bg-slate-900/80 px-2 py-1 text-[10px] text-slate-200" data-kind="love" data-post-index="${postIndex}">💜 ${post.reactions.love}</button>
             </div>
           </article>
         `).join('');
@@ -388,10 +569,9 @@
         document.querySelectorAll('.reaction-btn').forEach(btn => {
           btn.addEventListener('click', () => {
             const kind = btn.dataset.kind;
-            const article = btn.closest('article');
-            const idx = Array.from(feed.children).indexOf(article);
-            if (posts[idx] && posts[idx].reactions[kind] !== undefined) {
-              posts[idx].reactions[kind] += 1;
+            const index = Number(btn.dataset.postIndex);
+            if (posts[index] && posts[index].reactions[kind] !== undefined) {
+              posts[index].reactions[kind] += 1;
               renderPosts();
             }
           });
@@ -400,25 +580,121 @@
 
       function renderGroupFeed() {
         const feed = document.getElementById('group-feed');
-        feed.innerHTML = groupMessages.map(msg => `
-          <div class="rounded-2xl border border-white/10 bg-slate-950/60 p-3">
+        feed.innerHTML = groupMessages.map((msg, index) => `
+          <div class="rounded-2xl border border-white/10 bg-slate-950/60 p-3" data-message-index="${index}">
             <div class="flex items-center justify-between gap-2 mb-2">
-              <p class="text-xs font-bold text-white">${msg.author}</p>
-              <span class="text-[9px] uppercase tracking-[0.12em] text-violet-300">Grupa</span>
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center text-[9px] font-bold text-white">${msg.author.slice(0, 1).toUpperCase()}</div>
+                <div>
+                  <p class="text-xs font-bold text-white">${msg.author}</p>
+                  <p class="text-[9px] text-slate-500">${msg.time}</p>
+                </div>
+              </div>
+              <button class="reply-to-msg text-[9px] uppercase tracking-[0.12em] text-cyan-200" data-message-id="${msg.id}">Odpowiedz</button>
             </div>
+            ${msg.replyTo ? `<div class="reply-preview mb-2">↳ Odpowiedź do: ${groupMessages.find(m => m.id === msg.replyTo)?.text || 'wiadomości'}</div>` : ''}
             <p class="text-sm leading-6 text-slate-200">${msg.text}</p>
             <div class="mt-3 flex items-center gap-2">
-              <button class="group-reaction rounded-full border border-white/10 bg-slate-900/80 px-2 py-1 text-[10px] text-slate-200" data-kind="like">👍 ${msg.reactions.like}</button>
-              <button class="group-reaction rounded-full border border-white/10 bg-slate-900/80 px-2 py-1 text-[10px] text-slate-200" data-kind="fire">🔥 ${msg.reactions.fire}</button>
+              <button class="group-reaction rounded-full border border-white/10 bg-slate-900/80 px-2 py-1 text-[10px] text-slate-200" data-kind="like" data-message-index="${index}">👍 ${msg.reactions.like}</button>
+              <button class="group-reaction rounded-full border border-white/10 bg-slate-900/80 px-2 py-1 text-[10px] text-slate-200" data-kind="fire" data-message-index="${index}">🔥 ${msg.reactions.fire}</button>
             </div>
           </div>
         `).join('');
 
         document.querySelectorAll('.group-reaction').forEach(btn => {
           btn.addEventListener('click', () => {
-            const msgIndex = Number(btn.closest('div').dataset.index || 0);
+            const index = Number(btn.dataset.messageIndex);
+            const kind = btn.dataset.kind;
+            if (groupMessages[index] && groupMessages[index].reactions[kind] !== undefined) {
+              groupMessages[index].reactions[kind] += 1;
+              renderGroupFeed();
+            }
           });
         });
+
+        document.querySelectorAll('.reply-to-msg').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const targetId = btn.dataset.messageId;
+            const target = groupMessages.find(msg => msg.id === targetId);
+            replyTargetId = targetId;
+            const preview = document.getElementById('reply-preview');
+            const previewText = document.getElementById('reply-preview-text');
+            preview.classList.remove('hidden');
+            previewText.textContent = target ? target.text : '';
+            document.getElementById('group-input').focus();
+          });
+        });
+      }
+
+      function renderGroupChat() {
+        const chat = document.getElementById('group-chat');
+        chat.innerHTML = groupMessages.map((msg) => {
+          const replyMatch = msg.replyTo ? groupMessages.find(item => item.id === msg.replyTo) : null;
+          const isSelf = msg.self === true || msg.author === (isAdmin ? 'Admin' : 'Ty');
+
+          return `
+            <div class="chat-message ${isSelf ? 'self' : ''}">
+              <div class="chat-avatar">${msg.author.slice(0, 1).toUpperCase()}</div>
+              <div class="chat-bubble">
+                ${replyMatch ? `<div class="reply-preview">↳ Odpowiedź do: ${replyMatch.text}</div>` : ''}
+                <div class="flex items-center justify-between gap-2 mb-1">
+                  <span class="text-[10px] font-bold ${isSelf ? 'text-cyan-200' : 'text-violet-200'}">${msg.author}</span>
+                  <span class="text-[9px] text-slate-500">${msg.time}</span>
+                </div>
+                <p class="text-sm leading-6 text-slate-100">${msg.text}</p>
+                <div class="mt-2 flex items-center gap-2">
+                  <button class="group-chat-reaction rounded-full border border-white/10 bg-slate-900/80 px-2 py-1 text-[10px] text-slate-200" data-kind="like" data-message-id="${msg.id}">👍 ${msg.reactions.like}</button>
+                  <button class="group-chat-reaction rounded-full border border-white/10 bg-slate-900/80 px-2 py-1 text-[10px] text-slate-200" data-kind="fire" data-message-id="${msg.id}">🔥 ${msg.reactions.fire}</button>
+                  <button class="reply-to-chat text-[9px] uppercase tracking-[0.12em] text-cyan-200" data-message-id="${msg.id}">Odpowiedz</button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        document.querySelectorAll('.group-chat-reaction').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const messageId = btn.dataset.messageId;
+            const kind = btn.dataset.kind;
+            const msg = groupMessages.find(item => item.id === messageId);
+            if (msg && msg.reactions[kind] !== undefined) {
+              msg.reactions[kind] += 1;
+              renderGroupChat();
+            }
+          });
+        });
+
+        document.querySelectorAll('.reply-to-chat').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const targetId = btn.dataset.messageId;
+            const target = groupMessages.find(msg => msg.id === targetId);
+            replyTargetId = targetId;
+            const preview = document.getElementById('reply-preview');
+            const previewText = document.getElementById('reply-preview-text');
+            preview.classList.remove('hidden');
+            previewText.textContent = target ? target.text : '';
+            document.getElementById('group-input').focus();
+          });
+        });
+      }
+
+      function renderPhases() {
+        const phaseList = document.getElementById('phase-list');
+        phaseList.innerHTML = phaseBlueprints.map(phase => `
+          <div class="phase-card ${phase.active ? 'active' : ''} ${phase.locked ? 'locked' : ''}">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <p class="text-[9px] uppercase tracking-[0.18em] ${phase.active ? 'text-emerald-300' : 'text-slate-400'} font-bold">${phase.name}</p>
+                <h3 class="text-lg font-extrabold text-white mt-2">${phase.label}</h3>
+              </div>
+              <span class="phase-badge ${phase.active ? 'bg-emerald-500/15 text-emerald-200 border border-emerald-500/35' : 'bg-slate-800/80 text-slate-300 border border-slate-700'}">${phase.status}</span>
+            </div>
+            <p class="mt-3 text-sm leading-6 text-slate-300">${phase.description}</p>
+            <ul class="mt-4 space-y-2 text-xs text-slate-200">
+              ${phase.features.map(feature => `<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full ${phase.active ? 'bg-emerald-400' : 'bg-slate-500'}"></span>${feature}</li>`).join('')}
+            </ul>
+          </div>
+        `).join('');
       }
 
       function addPostFromAdmin() {
@@ -426,9 +702,7 @@
         const media = document.getElementById('admin-media-input').value.trim();
         const attachment = document.getElementById('admin-attachment-input').value.trim();
 
-        if (!text && !media) {
-          return;
-        }
+        if (!text && !media) return;
 
         posts.unshift({
           author: 'TechnixPro',
@@ -448,14 +722,39 @@
         const value = document.getElementById('group-input').value.trim();
         if (!value) return;
 
-        groupMessages.push({
-          author: isAdmin ? 'Admin' : 'Użytkownik',
+        const author = isAdmin ? 'Admin' : 'Ty';
+        const newMessage = {
+          id: 'g' + randomId(),
+          author,
           text: value,
-          reactions: { like: 0, fire: 0 }
-        });
+          time: new Date().toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' }),
+          self: true,
+          reactions: { like: 0, fire: 0 },
+          replyTo: replyTargetId
+        };
 
+        groupMessages.push(newMessage);
         document.getElementById('group-input').value = '';
+        replyTargetId = null;
+        document.getElementById('reply-preview').classList.add('hidden');
+        renderGroupChat();
         renderGroupFeed();
+      }
+
+      function saveDraft() {
+        const draftText = document.getElementById('admin-post-input').value.trim();
+        if (!draftText) return;
+        drafts.unshift(draftText);
+        renderDrafts();
+      }
+
+      function schedulePost() {
+        const text = document.getElementById('admin-post-input').value.trim();
+        if (!text) return;
+        const nextTime = new Date(Date.now() + 60 * 60 * 1000).toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' });
+        const scheduled = `Planowane: ${text} • ${nextTime}`;
+        drafts.unshift(scheduled);
+        renderDrafts();
       }
 
       document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -485,6 +784,8 @@
 
       document.getElementById('publish-post-btn').addEventListener('click', addPostFromAdmin);
       document.getElementById('group-publish-btn').addEventListener('click', addGroupMessage);
+      document.getElementById('save-draft-btn').addEventListener('click', saveDraft);
+      document.getElementById('schedule-post-btn').addEventListener('click', schedulePost);
 
       document.getElementById('add-task-btn').addEventListener('click', () => {
         const value = document.getElementById('task-input').value.trim();
@@ -516,10 +817,18 @@
         }
       });
 
+      document.getElementById('cancel-reply-btn').addEventListener('click', () => {
+        replyTargetId = null;
+        document.getElementById('reply-preview').classList.add('hidden');
+      });
+
       updateAdminVisibility();
       renderTasks();
       renderPosts();
+      renderDrafts();
       renderGroupFeed();
+      renderGroupChat();
+      renderPhases();
       toggleHomeTab('overview');
     </script>
   </body>
